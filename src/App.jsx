@@ -1,4 +1,5 @@
 import NavbarApp from './components/NavbarApp/NavbarApp'
+import { useState } from 'react'
 import {
   Container,
   Row,
@@ -10,6 +11,24 @@ import {
 } from 'react-bootstrap'
 
 function App() {
+  const [inputTodo, setInputTodo] = useState('')
+  const [mangas, setMangas] = useState(['Naruto', 'One Piece', 'One Punch Man'])
+
+  let displayMangas = mangas.map((manga, index) => {
+    return (
+      <ListGroup.Item key={index}>
+        {index + 1}. {manga}
+      </ListGroup.Item>
+    )
+  })
+
+  function addTodo() {
+    let tmp = [...mangas]
+    tmp.push(inputTodo)
+    setMangas(tmp)
+    setInputTodo('')
+  }
+
   return (
     <div className="App">
       <NavbarApp />
@@ -25,16 +44,17 @@ function App() {
         <Row>
           <Col md="6">
             <InputGroup className="mb-3">
-              <FormControl placeholder="Saisir une tache" />
-              <Button variant="primary">Ajouter</Button>
+              <FormControl
+                placeholder="Saisir une tache"
+                value={inputTodo}
+                onChange={(e) => setInputTodo(e.target.value)}
+              />
+              <Button variant="primary" onClick={addTodo}>
+                Ajouter
+              </Button>
             </InputGroup>
 
-            <ListGroup variant="flush">
-              <ListGroup.Item>Cras justo odio</ListGroup.Item>
-              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-              <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-              <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-            </ListGroup>
+            <ListGroup variant="flush">{displayMangas}</ListGroup>
           </Col>
         </Row>
       </Container>
