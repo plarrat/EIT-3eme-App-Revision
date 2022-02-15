@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { InputGroup, FormControl, Button, ListGroup } from 'react-bootstrap'
 
-export default function TodoList() {
+export default function TodoList(props) {
+  const { titre, todosParam } = props
+
   const [inputTodo, setInputTodo] = useState('')
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(todosParam)
 
   function addTodo() {
     let tmp = [...todos]
@@ -28,7 +30,10 @@ export default function TodoList() {
 
   let displayTodos = todos.map((todo, index) => {
     return (
-      <ListGroup.Item key={index} onDoubleClick={() => updateTodo(index, todo)}>
+      <ListGroup.Item
+        key={titre + '-' + index}
+        onDoubleClick={() => updateTodo(index, todo)}
+      >
         {index + 1}. {todo}
         <Button
           variant="danger"
@@ -47,6 +52,8 @@ export default function TodoList() {
 
   return (
     <>
+      <h3>{titre}</h3>
+      <hr />
       <InputGroup className="mb-3">
         <FormControl
           placeholder="Saisir une tache"

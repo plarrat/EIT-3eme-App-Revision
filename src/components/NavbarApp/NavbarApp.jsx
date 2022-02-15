@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav, Button } from 'react-bootstrap'
 
 export default function NavbarApp() {
   return (
@@ -11,6 +11,7 @@ export default function NavbarApp() {
           <Nav className="me-auto">
             <Nav.Link href="#home">Accueil</Nav.Link>
           </Nav>
+          <Button variant="primary">Nouvelle Liste</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
