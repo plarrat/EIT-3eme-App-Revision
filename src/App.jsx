@@ -8,11 +8,12 @@ import {
   FormControl,
   Button,
   ListGroup,
+  Badge,
 } from 'react-bootstrap'
 
 function App() {
   const [inputTodo, setInputTodo] = useState('')
-  const [mangas, setMangas] = useState(['Naruto', 'One Piece', 'One Punch Man'])
+  const [mangas, setMangas] = useState([])
 
   let displayMangas = mangas.map((manga, index) => {
     return (
@@ -64,7 +65,12 @@ function App() {
       <Container>
         <Row>
           <Col className="mt-5">
-            <h1>Application TodoList</h1>
+            <h1>
+              Application TodoList{' '}
+              <Badge pill bg="primary" className="fs-4">
+                {mangas.length}
+              </Badge>
+            </h1>
             <hr />
           </Col>
         </Row>
