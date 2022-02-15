@@ -16,8 +16,22 @@ function App() {
 
   let displayMangas = mangas.map((manga, index) => {
     return (
-      <ListGroup.Item key={index}>
+      <ListGroup.Item
+        key={index}
+        onDoubleClick={() => updateTodo(index, manga)}
+      >
         {index + 1}. {manga}
+        <Button
+          variant="danger"
+          size="sm"
+          className="float-end"
+          onClick={() => {
+            deleteTodo(index)
+          }}
+          onDoubleClick={(e) => e.stopPropagation()}
+        >
+          Supprimer
+        </Button>
       </ListGroup.Item>
     )
   })
@@ -27,6 +41,20 @@ function App() {
     tmp.push(inputTodo)
     setMangas(tmp)
     setInputTodo('')
+  }
+
+  function deleteTodo(index) {
+    let tmp = [...mangas]
+    tmp.splice(index, 1)
+    setMangas(tmp)
+  }
+
+  function updateTodo(index, manga) {
+    let res = window.prompt('Modification de la donnée : ', manga)
+    if (res === null || res.trim().length === 0) return null
+    let tmp = [...mangas]
+    tmp[index] = res
+    setMangas(tmp)
   }
 
   return (
