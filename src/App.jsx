@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarApp />
+      <NavbarApp liste={liste} setListe={setListe} />
 
       <Container>
         <Row>
