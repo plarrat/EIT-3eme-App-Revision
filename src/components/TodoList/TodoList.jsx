@@ -1,5 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
-import { InputGroup, FormControl, Button, ListGroup } from 'react-bootstrap'
+import {
+  InputGroup,
+  FormControl,
+  Button,
+  ListGroup,
+  CloseButton,
+} from 'react-bootstrap'
 
 export default function TodoList(props) {
   const { titre, todosParam, setListe, liste, indexListe } = props
@@ -62,7 +68,9 @@ export default function TodoList(props) {
 
   return (
     <>
-      <h3>{titre}</h3>
+      <h3>
+        {titre} <CloseButton className="fs-5 float-end" />
+      </h3>
       <hr />
       <InputGroup className="mb-3">
         <FormControl
