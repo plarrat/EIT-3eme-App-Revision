@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { InputGroup, FormControl, Button, ListGroup } from 'react-bootstrap'
 
 export default function TodoList(props) {
@@ -7,13 +7,15 @@ export default function TodoList(props) {
   const [inputTodo, setInputTodo] = useState('')
   const [todos, setTodos] = useState(todosParam)
 
-  function majParent() {
+  const majParent = useCallback(() => {
     let tmpListe = [...liste]
     tmpListe[indexListe].todos = [...todos]
     setListe(tmpListe)
-  }
+  }, [liste, indexListe, setListe, todos])
 
-  useEffect(() => majParent(), [todos])
+  useEffect(() => {
+    if (JSON.stringify(todosParam) !== JSON.stringify(todos)) majParent()
+  }, [todos, majParent, todosParam])
 
   function addTodo() {
     let tmp = [...todos]
