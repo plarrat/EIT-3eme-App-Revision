@@ -13,15 +13,12 @@ import {
 
 function App() {
   const [inputTodo, setInputTodo] = useState('')
-  const [mangas, setMangas] = useState([])
+  const [todos, setTodos] = useState([])
 
-  let displayMangas = mangas.map((manga, index) => {
+  let displayTodos = todos.map((todo, index) => {
     return (
-      <ListGroup.Item
-        key={index}
-        onDoubleClick={() => updateTodo(index, manga)}
-      >
-        {index + 1}. {manga}
+      <ListGroup.Item key={index} onDoubleClick={() => updateTodo(index, todo)}>
+        {index + 1}. {todo}
         <Button
           variant="danger"
           size="sm"
@@ -38,24 +35,24 @@ function App() {
   })
 
   function addTodo() {
-    let tmp = [...mangas]
+    let tmp = [...todos]
     tmp.push(inputTodo)
-    setMangas(tmp)
+    setTodos(tmp)
     setInputTodo('')
   }
 
   function deleteTodo(index) {
-    let tmp = [...mangas]
+    let tmp = [...todos]
     tmp.splice(index, 1)
-    setMangas(tmp)
+    setTodos(tmp)
   }
 
-  function updateTodo(index, manga) {
-    let res = window.prompt('Modification de la donnée : ', manga)
+  function updateTodo(index, todo) {
+    let res = window.prompt('Modification de la donnée : ', todo)
     if (res === null || res.trim().length === 0) return null
-    let tmp = [...mangas]
+    let tmp = [...todos]
     tmp[index] = res
-    setMangas(tmp)
+    setTodos(tmp)
   }
 
   return (
@@ -68,7 +65,7 @@ function App() {
             <h1>
               Application TodoList{' '}
               <Badge pill bg="primary" className="fs-4">
-                {mangas.length}
+                {todos.length}
               </Badge>
             </h1>
             <hr />
@@ -88,7 +85,7 @@ function App() {
               </Button>
             </InputGroup>
 
-            <ListGroup variant="flush">{displayMangas}</ListGroup>
+            <ListGroup variant="flush">{displayTodos}</ListGroup>
           </Col>
         </Row>
       </Container>
