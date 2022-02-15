@@ -55,6 +55,14 @@ export default function TodoList(props) {
     setListe(tmp)
   }
 
+  function updateTitre() {
+    let rep = window.prompt('Saisir le nouveau nom :', titre)
+    if (rep === null || rep.trim().length === 0) return null
+    let tmp = [...liste]
+    tmp[indexListe].titre = rep
+    setListe(tmp)
+  }
+
   let displayTodos = todos.map((todo, index) => {
     return (
       <ListGroup.Item
@@ -80,7 +88,8 @@ export default function TodoList(props) {
   return (
     <>
       <h3>
-        {titre} <CloseButton onClick={deleteListe} className="fs-5 float-end" />
+        <span onDoubleClick={updateTitre}>{titre}</span>{' '}
+        <CloseButton onClick={deleteListe} className="fs-5 float-end" />
       </h3>
       <hr />
       <InputGroup className="mb-3">
