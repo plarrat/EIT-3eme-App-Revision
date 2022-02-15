@@ -21,7 +21,13 @@ function App() {
   let displayListe = liste.map((item, index) => {
     return (
       <Col md="4" key={'Liste-' + item.titre + '-' + index.toString()}>
-        <TodoList titre={item.titre} todosParam={item.todos} />
+        <TodoList
+          titre={item.titre}
+          todosParam={item.todos}
+          setListe={setListe}
+          liste={liste}
+          indexListe={index}
+        />
       </Col>
     )
   })

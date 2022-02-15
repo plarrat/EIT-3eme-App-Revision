@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { InputGroup, FormControl, Button, ListGroup } from 'react-bootstrap'
 
 export default function TodoList(props) {
-  const { titre, todosParam } = props
+  const { titre, todosParam, setListe, liste, indexListe } = props
 
   const [inputTodo, setInputTodo] = useState('')
   const [todos, setTodos] = useState(todosParam)
+
+  function majParent() {
+    let tmpListe = [...liste]
+    tmpListe[indexListe].todos = [...todos]
+    setListe(tmpListe)
+  }
+
+  useEffect(() => majParent(), [todos])
 
   function addTodo() {
     let tmp = [...todos]
