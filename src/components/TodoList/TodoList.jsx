@@ -44,6 +44,17 @@ export default function TodoList(props) {
     setTodos(tmp)
   }
 
+  function deleteListe() {
+    let rep = window.confirm(
+      'Etes-vous sûr de vouloir supprimer la liste : ' + titre
+    )
+    if (rep === false) return null
+
+    let tmp = [...liste]
+    tmp.splice(indexListe, 1)
+    setListe(tmp)
+  }
+
   let displayTodos = todos.map((todo, index) => {
     return (
       <ListGroup.Item
@@ -69,7 +80,7 @@ export default function TodoList(props) {
   return (
     <>
       <h3>
-        {titre} <CloseButton className="fs-5 float-end" />
+        {titre} <CloseButton onClick={deleteListe} className="fs-5 float-end" />
       </h3>
       <hr />
       <InputGroup className="mb-3">
